@@ -2,6 +2,7 @@
 // =============================================================
 var express = require("express");
 var path = require("path");
+require("dotenv").config()
 
 // Sets up the Express App
 // =============================================================
@@ -43,12 +44,18 @@ var characters = [
 
 // Basic route that sends the user first to the AJAX Page
 app.get("/", function (req, res) {
+  console.log(process.env.NAME)
   res.sendFile(path.join(__dirname, "view.html"));
 });
 
 app.get("/add", function (req, res) {
   res.sendFile(path.join(__dirname, "add.html"));
 });
+
+
+app.get("/env", (req, res) => {
+  res.send(process.env.NAME)
+})
 
 // Displays all characters
 app.get("/api/characters", function (req, res) {
